@@ -4,3 +4,15 @@
 .terms {
   margin: 100px 0 0;
 }
+
+a[mat-raised-button] {
+  min-width: 290px;
+  justify-content: flex-start;
+  .flex {
+    display: flex;
+    gap: 5px;
+    img {
+      border-radius: 5px;
+    }
+  }
+}

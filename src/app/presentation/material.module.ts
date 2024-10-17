@@ -12,7 +12,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatStepperModule } from '@angular/material/stepper';
-
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [],
@@ -31,7 +31,8 @@ import { MatStepperModule } from '@angular/material/stepper';
     MatProgressSpinnerModule,
     MatCardModule,
     MatGridListModule,
-    MatStepperModule
+    MatStepperModule,
+    MatIconModule
   ]
 })
 export class MaterialModule {
