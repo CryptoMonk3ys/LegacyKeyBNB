@@ -47,6 +47,7 @@ export class ContractComponent implements OnInit {
     grantor_email: ['', [Validators.required, Validators.email]],
     grantor_phonenumber: ['', Validators.required],
     beneficiarys_amount: ['', Validators.required],
+    approveStaking: false,
   });
   beneficiariesFormGroup = this._formBuilder.group({
     beneficiaries: this._formBuilder.array([])
@@ -57,7 +58,7 @@ export class ContractComponent implements OnInit {
     validators: this._formBuilder.array([])
   });
 
-  
+
 
   ngOnInit(): void {
     this.getAccountUseCase.execute()
@@ -151,13 +152,13 @@ export class ContractComponent implements OnInit {
     }
     console.log("beneciciarios: ",ben);
 
-    
+
     let tes=[];
     for (let wit of this.validatorArr.value){
       tes.push(principalCV(wit.walletAddress));
-    }    
+    }
     console.log("testigos: ",tes);
-    
+
     try {
       const heredero=listCV(ben);
       const validador=listCV(tes);
@@ -165,15 +166,15 @@ export class ContractComponent implements OnInit {
       openContractCall({
         network: new StacksTestnet(),
         anchorMode: AnchorMode.Any, // which type of block the tx should be mined in
-      
+
         contractAddress: 'ST2KMEEVZBBKN1AN856MB356GD3G3TTN8X8N0B05D',
         contractName: 'LegacyKeyV1',
         functionName: 'newMember',
         functionArgs: [heredero,validador,uintCV(12),uintCV(1000),trueCV()],
-      
+
         postConditionMode: PostConditionMode.Deny, // whether the tx should fail when unexpected assets are transferred
         postConditions: [], // for an example using post-conditions, see next example
-      
+
         onFinish: response => {
           console.log('Se realizó el registro de herencia correctamente');
         },
@@ -181,23 +182,23 @@ export class ContractComponent implements OnInit {
           console.log('No se realizó el registro de herencia');
         },
       });
-      
-      
+
+
 
       return {
         status: 201,
         message: 'Transaction Success',
-        
+
         // result: this.convertBigintToString(transaction),
       };
     } catch (error: unknown) {
       if (error instanceof Error) {
         // Maneja los errores y los registra
         console.log('=> error:', error);
-        
+
       }
       throw error;
-    }  
+    }
 
     /* let vali = [];
     let bene = [];
