@@ -1,1 +1,1 @@
-export type Blockchain = "algorand" | "ethereum" | "vara" | "stacks";
+export type Blockchain = "algorand" | "ethereum" | "vara" | "stacks" | "pado";

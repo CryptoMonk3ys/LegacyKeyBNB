@@ -1,1 +1,1 @@
-export type Web3Wallet = "pera" | "metamask" | "polkadot" | "xverse";
+export type Web3Wallet = "pera" | "metamask" | "polkadot" | "xverse" | "pado";

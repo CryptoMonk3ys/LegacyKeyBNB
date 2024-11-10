@@ -9,6 +9,7 @@ import { LoaderDialog } from '../../components/dialogs/loader/loader.dialog';
 //import { web3Accounts, web3Enable, web3FromAddress,web3FromSource } from '@polkadot/extension-dapp';
 //import { decodeAddress, ProgramMetadata, GearApi} from "@gear-js/api";
 import { pagar } from './RegistroSC';
+import { Buffer } from 'buffer';
 import { StacksTestnet } from '@stacks/network';
 import { openContractCall, getUserData } from '@stacks/connect';
 import { PostConditionMode } from '@stacks/transactions';
@@ -53,67 +54,14 @@ export class PaymentComponent implements OnInit {
   }
 
   async pago() {
-    await pagar();   
-
-    try {
-      const senderAddress = (await getUserData()).profile.stxAddress.testnet;
-    const recipientAddress = 'ST2PHRTBJ1CN8XRBBHTX3ES49JZAGTC0FWAGJFR8T';
-
-    // Contract details
-    const contractAddress = 'ST2KMEEVZBBKN1AN856MB356GD3G3TTN8X8N0B05D';
-    const contractName = 'TestStableCoin';
+    this.goToNext();
+    /*         
+    const pago=await pagar();
+    await this.config();
     
-    // Token details
-    const amountToTransfer = 100; // Number of tokens to transfer
-    const memo = Buffer.from('Enviando tokens a Brian'); // Memo as a Buffer
-
-    openContractCall({
-      network: new StacksTestnet(),
-      anchorMode: AnchorMode.Any, // which type of block the tx should be mined in    
-      contractAddress: 'ST2KMEEVZBBKN1AN856MB356GD3G3TTN8X8N0B05D',
-      contractName: 'TestStableCoin',
-      functionName: 'transfer',
-      functionArgs: [
-        uintCV(amountToTransfer),
-        standardPrincipalCV(senderAddress),
-        standardPrincipalCV(recipientAddress),
-        someCV(bufferCV(memo)) // Memo as a Some(buff 34)
-      ],
-    
-      postConditionMode: PostConditionMode.Deny, // whether the tx should fail when unexpected assets are transferred
-      postConditions: [
-        makeStandardFungiblePostCondition(
-          senderAddress,
-          FungibleConditionCode.Equal,
-          amountToTransfer,
-          createAssetInfo(contractAddress, contractName, 'clarity-coin-btc')
-        )
-      ],
-    
-      onFinish: response => {
-        console.log('Se realizó el pago correctamente');
-      },
-      onCancel: () => {
-        console.log('No se realizó el pago');
-      },
-    });
-      
-      this.onSuccessPayment();
-
-      return {
-        status: 201,
-        message: 'Transaction Success',
-        
-        // result: this.convertBigintToString(transaction),
-      };
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        // Maneja los errores y los registra
-        console.log('=> error:', error);
-        
-      }
-      throw error;
-    }   
+    if (pago){
+      this.goToNext();
+    } */
 
   }
 

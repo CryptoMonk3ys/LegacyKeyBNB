@@ -11,10 +11,9 @@ import { LoaderDialog } from '../../components/dialogs/loader/loader.dialog';
 //import { decodeAddress, ProgramMetadata, GearApi} from "@gear-js/api";
 import { AppConfig, UserSession, getUserData, showConnect } from '@stacks/connect';
 import { StacksTestnet } from '@stacks/network';
-import { AnchorMode } from '@stacks/transactions';
 import { openContractCall } from '@stacks/connect';
-import { PostConditionMode } from '@stacks/transactions';
-import { stringCV, principalCV, uintCV, listCV, trueCV, optionalCVOf} from '@stacks/transactions';
+import { createAssetInfo, PostConditionMode, AnchorMode, FungibleConditionCode,makeStandardFungiblePostCondition, makeContractCall, broadcastTransaction } from '@stacks/transactions';
+import { someCV, bufferCV, standardPrincipalCV, stringCV, principalCV, uintCV, listCV, trueCV, optionalCVOf} from '@stacks/transactions';
 
 @Component({
   selector: 'app-cobro',
@@ -45,50 +44,17 @@ export class CobroComponent implements OnInit {
   }
 
   async cobro() {
-    /*
     if (this.wallterAddress == null || this.heir.idWithdraw == null) {
       return;
-    }*/
-
-    this.showLoader();
-    const cantidad=uintCV(1);
-    openContractCall({
-        network: new StacksTestnet(),
-        anchorMode: AnchorMode.Any, // which type of block the tx should be mined in
-
-        contractAddress: 'ST2KMEEVZBBKN1AN856MB356GD3G3TTN8X8N0B05D',
-        contractName: 'LegacyKeyV1',
-        functionName: 'withDrawHeir',
-        functionArgs: [cantidad],
-
-        postConditionMode: PostConditionMode.Deny, // whether the tx should fail when unexpected assets are transferred
-        postConditions: [], // for an example using post-conditions, see next example
-
-        onFinish: response => {
-          console.log('Cobro procesado con éxito');
-        },
-        onCancel: () => {
-          console.log('No se procesó el cobro');
-        },
-    });
-
-    const signer = async () => {
-      /*
-      try {
-        await transferExtrinsic
-          .signAndSend(
-            account ,
-            { signer: injector.signer }
-          )
-          .catch((error: any) => {
-            console.log(":( transaction failed", error);
-          }); 
-      } catch (error) {
-        console.log(error);
-      }*/
     }
 
-    signer().then(() => {
+    this.showLoader();
+
+    this.collectLegacyUseCase.execute({
+      walletChain: this.walletChain,
+      walletAddress: this.wallterAddress,
+      idLegacy: this.heir.idWithdraw
+    }).then(() => {
       this.onSuccessSave();
     }).catch(e => {
       console.log(e);

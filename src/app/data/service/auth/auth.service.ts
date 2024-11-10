@@ -4,6 +4,7 @@ import { PeraWalletService } from '../pera-wallet/pera-wallet.service';
 import { MetamaskWalletService } from '../metamask-wallet/metamask-wallet.service';
 import { PolkadotWalletService } from '../polkadot-wallet/polkadot-wallet.service';
 import { XverseWalletService } from '../xverse-wallet/xverse-wallet.service';
+import { padoService } from '../pado-connect/padoConnect.service';
 import { WalletRepository } from '../../../domain/repository/wallet.repository';
 import { Web3Wallet } from '../../../domain/type/web3-wallet.type';
 import { Account } from '../../../domain/model/account.model';
@@ -23,6 +24,7 @@ export class AuthService {
     private metamaskWallet: MetamaskWalletService,
     private polkadotkWallet: PolkadotWalletService,
     private xverseWallet: XverseWalletService,
+    private padoWallet: padoService,
   ) {
   }
 
@@ -50,6 +52,15 @@ export class AuthService {
         case "xverse": {
           console.log("xverse auth");
           const accounts = await this.xverseWallet.connect();
+          console.log("cuenta1 ",accounts);
+          this.setAccountAddress(accounts[0]);
+          console.log("cuenta ",accounts);
+          resolve(accounts);
+          break;
+        }
+        case "pado": {
+          console.log("PADO auth");
+          const accounts = await this.padoWallet.connect();
           console.log("cuenta1 ",accounts);
           this.setAccountAddress(accounts[0]);
           console.log("cuenta ",accounts);

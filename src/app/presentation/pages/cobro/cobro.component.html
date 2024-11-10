@@ -2,20 +2,20 @@
   <form id="contract-form" class="form">
 
     <div class="validators">
-      <h4>Heredero</h4>
+      <h4>Heir</h4>
       <div class="row">
         <label>LegacyID</label>
-        <input type="text" name="idWithdraw" [(ngModel)]="heir.idWithdraw" placeholder="Escribe aqui el LegacyID"
+        <input type="text" name="idWithdraw" [(ngModel)]="heir.idWithdraw" placeholder="Write the LegacyID here"
           required />
       </div>
       <div class="row">
-        <label>Nombre</label>
-        <input type="text"  placeholder="Escribe aqui tus nombres"
+        <label>Name</label>
+        <input type="text"  placeholder="Write your names here"
           required />
       </div>
       <div class="row">
-        <label>Apellidos</label>
-        <input type="text"  placeholder="Escribe aqui tus apellidos"
+        <label>Surnames</label>
+        <input type="text"  placeholder="Write your surnames here"
           required />
       </div>
       <div class="row">
@@ -25,7 +25,7 @@
 
     <div class="footer">
       <div class="error" *ngIf="errorMessage">{{errorMessage}}</div>
-      <button type="submit" (click)="cobro()" color="primary">Cobrar</button>
+      <button type="submit" (click)="cobro()" color="primary">Withdraw</button>
     </div>
   </form>
 </section>

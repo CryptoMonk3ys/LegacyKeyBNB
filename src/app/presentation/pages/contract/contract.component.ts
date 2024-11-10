@@ -126,81 +126,15 @@ export class ContractComponent implements OnInit {
     }
   }
 
-  async savePress() { /*
+  async savePress() { 
+    
     if (this.wallterAddress == null) {
       return;
     }
 
-    if(!this.grantorFormGroup.valid) {
-      this.stepper.selectedIndex = 0;
-      return;
-    }
-    if(!this.beneficiariesFormGroup.valid) {
-      this.stepper.selectedIndex = 1;
-      return;
-    }
-    if(!this.validatorsFormGroup.valid) {
-      this.stepper.selectedIndex = 2;
-      return;
-    }*/
-
     this.showLoader();
-    const signer = async() =>{}
-    let ben=[];
-    for (let heir of this.beneficiaryArr.value){
-      ben.push(principalCV(heir.walletAddress));
-    }
-    console.log("beneciciarios: ",ben);
 
-
-    let tes=[];
-    for (let wit of this.validatorArr.value){
-      tes.push(principalCV(wit.walletAddress));
-    }
-    console.log("testigos: ",tes);
-
-    try {
-      const heredero=listCV(ben);
-      const validador=listCV(tes);
-      console.log(heredero,validador);
-      openContractCall({
-        network: new StacksTestnet(),
-        anchorMode: AnchorMode.Any, // which type of block the tx should be mined in
-
-        contractAddress: 'ST2KMEEVZBBKN1AN856MB356GD3G3TTN8X8N0B05D',
-        contractName: 'LegacyKeyV1',
-        functionName: 'newMember',
-        functionArgs: [heredero,validador,uintCV(12),uintCV(1000),trueCV()],
-
-        postConditionMode: PostConditionMode.Deny, // whether the tx should fail when unexpected assets are transferred
-        postConditions: [], // for an example using post-conditions, see next example
-
-        onFinish: response => {
-          console.log('Se realizó el registro de herencia correctamente');
-        },
-        onCancel: () => {
-          console.log('No se realizó el registro de herencia');
-        },
-      });
-
-
-
-      return {
-        status: 201,
-        message: 'Transaction Success',
-
-        // result: this.convertBigintToString(transaction),
-      };
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        // Maneja los errores y los registra
-        console.log('=> error:', error);
-
-      }
-      throw error;
-    }
-
-    /* let vali = [];
+    let vali = [];
     let bene = [];
 
     for (var i = 0; i < this.contract.beneficiaries.length; i++) {
@@ -215,9 +149,15 @@ export class ContractComponent implements OnInit {
         vali.push(this.contract.validators[i].walletAddress);
       }
       catch { }
-    } */
+    }
 
-    signer().then(() => {
+    this.saveLegacyUseCase.execute({
+      walletChain: this.walletChain,
+      beneficiaries: bene,
+      validators: vali,
+      amount: this.amount,
+      walletAddress: this.wallterAddress
+    }).then(() => {
       this.onSuccessSave();
     }).catch(e => {
       console.log(e);

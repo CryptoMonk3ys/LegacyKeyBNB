@@ -1,25 +1,25 @@
 <section>
-  <h2>Pago de servicio</h2>
-  <div>Dirección: {{wallterAddress}}</div>
+  <h2>Service payment</h2>
+  <div>Address: {{wallterAddress}}</div>
 </section>
 <section>
-  <h4>Detalles de pago</h4>
+  <h4>Payment details</h4>
   <form class="form">
     <div class="row">
-      <label>Plan asignado:</label>
+      <label>Assigned plan:</label>
       <span>PRO+</span>
     </div>
     <div class="row">
-      <label>Monto:</label>
+      <label>Amount:</label>
       <span>100 USDT</span>
     </div>
     <div class="row">
-      <label>Tipo de pago:</label>
-      <span>Único</span>
+      <label>Payment type:</label>
+      <span>Only</span>
     </div>
     <div class="footer">
       <div class="error" *ngIf="errorMessage">{{errorMessage}}</div>
-      <button type="submit" mat-raised-button color="primary" (click)="pago()">Pagar ahora</button>
+      <button type="submit" mat-raised-button color="primary" (click)="onPay()">Pay now</button>
     </div>
   </form>
 </section>

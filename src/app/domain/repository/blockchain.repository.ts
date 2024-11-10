@@ -7,8 +7,10 @@ export abstract class BlockchainRepository {
   abstract getAssetByID(index: number): Promise<Asset>;
   abstract createAccount(): Promise<Account>;
   abstract isPaidLegacyKeySC(address: string): Promise<boolean>;
+  abstract isProofOfHumanity(address: string): Promise<boolean>;
   abstract getDataLegacyKeySC(address: string): Promise<any>;
   abstract payLegacyKeySC(address: string): Promise<void>;
+  abstract proofOfHumanity(address: string): Promise<void>;
   abstract newMemberLegacyKeySC(address: string, amount: number, validators: any[], beneficiaries: any[]): Promise<void>;
   abstract voteValidador(address: string, idLegacy: string): Promise<void>;
   abstract withdrawHeir(address: string, idLegacy: string): Promise<void>;

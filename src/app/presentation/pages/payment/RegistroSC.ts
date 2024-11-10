@@ -36,7 +36,9 @@ export async function pagar() {
       
     }
     throw error;
-  }  
+  } 
+
+  return true;
     
    
 }

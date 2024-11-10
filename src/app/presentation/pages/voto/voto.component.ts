@@ -44,35 +44,18 @@ export class VotoComponent implements OnInit {
   }
 
   async voto() {
-    /*
     if (this.wallterAddress == null || this.validator.idVote == null) {
       return;
-    }*/
+    }
 
     this.showLoader();
-    const signer = async () => {}
-    const cantidad=uintCV(1);
-    openContractCall({
-        network: new StacksTestnet(),
-        anchorMode: AnchorMode.Any, // which type of block the tx should be mined in
 
-        contractAddress: 'ST2KMEEVZBBKN1AN856MB356GD3G3TTN8X8N0B05D',
-        contractName: 'LegacyKeyV1',
-        functionName: 'voteValidador',
-        functionArgs: [cantidad],
-
-        postConditionMode: PostConditionMode.Deny, // whether the tx should fail when unexpected assets are transferred
-        postConditions: [], // for an example using post-conditions, see next example
-
-        onFinish: response => {
-          console.log('Voto procesado con éxito');
-        },
-        onCancel: () => {
-          console.log('No se procesó el voto');
-        },
-    });
-
-    signer().then(() => {
+    this.voteLegacyUseCase.execute({
+      walletChain: this.walletChain,
+      walletAddress: this.wallterAddress,
+      idLegacy: this.validator.idVote,
+      //SCLegacyKeyAddress: this.id.SCLegacyKeyAddress
+    }).then(() => {
       this.onSuccessSave();
     }).catch(e => {
       console.log(e);
