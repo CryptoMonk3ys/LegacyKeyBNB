@@ -1,5 +1,5 @@
 # LegacyKey
-
+LegacyKey smartcontract: 0x45A72A1C7a73F994cC8B02AFc793bc5052D58749
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.8.
 
 ## Development server
